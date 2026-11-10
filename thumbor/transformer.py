@@ -298,6 +298,12 @@ class Transformer:
             )
             crop_height = source_height
 
+        # A ratio far from the source's can round one crop side to 0,
+        # which leaves an empty crop and a blank image. Keep each side at
+        # least one pixel.
+        crop_width = max(1, crop_width)
+        crop_height = max(1, crop_height)
+
         crop_left = int(
             round(
                 min(
